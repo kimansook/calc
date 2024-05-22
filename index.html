@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공학용 계산기</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+            margin: 0;
+        }
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .display {
+            width: 100%;
+            height: 60px;
+            background: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            font-size: 2em;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            height: 60px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ddd;
+        }
+        .button-operator {
+            background: #f9a825;
+            color: #fff;
+        }
+        .button-equal {
+            background: #29b6f6;
+            color: #fff;
+            grid-column: span 4;
+        }
+        .button-clear {
+            background: #e53935;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="button-clear" onclick="clearDisplay()">C</button>
+            <button class="button-operator" onclick="appendOperator('(')">(</button>
+            <button class="button-operator" onclick="appendOperator(')')">)</button>
+            <button class="button-operator" onclick="appendOperator('/')">÷</button>
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button class="button-operator" onclick="appendOperator('*')">×</button>
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button class="button-operator" onclick="appendOperator('-')">-</button>
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button class="button-operator" onclick="appendOperator('+')">+</button>
+            <button onclick="appendNumber(0)">0</button>
+            <button onclick="appendOperator('.')">.</button>
+            <button class="button-operator" onclick="calculateSquareRoot()">√</button>
+            <button class="button-equal" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function clearDisplay() {
+            display.textContent = '0';
+        }
+
+        function appendNumber(number) {
+            if (display.textContent === '0') {
+                display.textContent = number;
+            } else {
+                display.textContent += number;
+            }
+        }
+
+        function appendOperator(operator) {
+            display.textContent += operator;
+        }
+
+        function calculateSquareRoot() {
+            display.textContent = Math.sqrt(eval(display.textContent));
+        }
+
+        function calculateResult() {
+            try {
+                display.textContent = eval(display.textContent);
+            } catch {
+                display.textContent = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
